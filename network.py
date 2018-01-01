@@ -1,6 +1,10 @@
 
 import numpy as np
 import random
+try:
+   import cPickle as cPickle
+except:
+   import pickle as cPickle
 
 class Network(object):
 
@@ -110,3 +114,26 @@ class Network(object):
     def sigmoid_prime(self,z):
         """Derivative of the sigmoid function."""
         return self.sigmoid(z)*(1-self.sigmoid(z))
+    
+    if __name__ == '__main__':
+        dlProg = DSProgress()
+        dlProg.setup_data_files()
+        
+        # Retrieve the training, validation and test data
+        training_data, validation_data, test_data = unpickle("mnist.pkl")
+        display_stats(training_data, 300)
+        
+        net = Network([784, 100, 10])
+        training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+        training_input = training_data
+        test_input = test_data
+        net.SGD(training_input, 10, 20, 3, test_data=test_input)
+        
+        # save the model to disk
+        filename = 'models/digit_rec_model.sav'
+        cPickle.dump(net, open(filename, 'wb'))
+        
+        # load the model from disk
+        loaded_model = cPickle.load(open(filename, 'rb'))
+        result = loaded_model.evaluate(validation_data)
+        print(result/len(validation_data))
