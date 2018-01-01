@@ -47,6 +47,4 @@ class DSProgress(object):
             self.test_folder_path(FILE_TO_STORE)
         else:
             print ("Either file is missing or is not readable")
-            
-dlProg = DSProgress()
-dlProg.setup_data_files()
+
