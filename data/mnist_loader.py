@@ -1,4 +1,4 @@
-import _pickle
+import pickle
 import gzip
 import numpy as np
 
