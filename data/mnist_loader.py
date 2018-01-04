@@ -1,9 +1,10 @@
 import pickle
 import gzip
 import numpy as np
+import sys
 
 def load_data():
-    f = gzip.open('/home/the_doctor/Documents/MLearn/mnist.pkl.gz', 'rb')
+    f = gzip.open('mnist.pkl.gz', 'rb')
     training_data, validation_data, test_data = _pickle.load(f, encoding='latin1')
     f.close()
     return (training_data, validation_data, test_data)
